@@ -49,14 +49,22 @@ namespace Students
 
             List<Student> studentList = new List<Student>() { student1, student2, student3, student4 };
 
-            IEnumerable<int> ids = studentList.Select(s => s.StudentID).Take(2);
+            IEnumerable<int> ids = studentList.Select(s => s.StudentID).Take(4).OrderByDescending(x => x);
             foreach (var id in ids)
             {
                 Console.WriteLine("Student ID: "+ id);
             }
 
 
+            var query = from student in studentList
+                        orderby student.FirstName descending
+                        where student.StudentID > 205
+                        select student;
 
+            foreach (var item in query)
+            {
+                Console.WriteLine(item.FirstName);
+            }
 
         }
     }
